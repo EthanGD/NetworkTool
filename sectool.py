@@ -1069,7 +1069,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(_translate("MainWindow", "安全测试工具 V1.0 By SecLab 2015.12.10", None))
+        MainWindow.setWindowTitle(_translate("MainWindow", "By Topper 2016.01", None))
         self.Label_Ip.setText(_translate("MainWindow", "IP", None))
         self.B_send.setText(_translate("MainWindow", "发送", None))
         self.radio_wireshark.setText(_translate("MainWindow", "WireShark流", None))
