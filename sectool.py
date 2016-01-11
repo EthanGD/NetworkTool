@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
-
+#!/usr/bin
 #
+# Created: Wed Nov 04 12:26:17 2015
+#      by: Topper
 #
 # WARNING! All changes made in this file will be lost!
 import sys
 import socket
 import time
 import re
+#import win32api
 import random
 import struct
 import threading
@@ -662,7 +665,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.Edit_data = QtGui.QTextEdit(self.tab_Data)
         self.Edit_data.setGeometry(QtCore.QRect(0, 30, 691, 371))
         font = QtGui.QFont()
-        font.setPointSize(14)
+        font.setPointSize(12)
         self.Edit_data.setFont(font)
         self.Edit_data.setFrameShadow(QtGui.QFrame.Plain)
         self.Edit_data.setLineWidth(1)
@@ -747,7 +750,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.comboBox_BM.addItem(_fromUtf8(""))
         self.comboBox_BM.addItem(_fromUtf8(""))
         self.comboBox_BM.addItem(_fromUtf8(""))
-        self.textEdit_Data = QtGui.QTextEdit(self.tab_Bjm)
+        self.textEdit_Data = QtGui.QPlainTextEdit(self.tab_Bjm)
         self.textEdit_Data.setGeometry(QtCore.QRect(0, 60, 691, 151))
         self.textEdit_Data.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
         self.textEdit_Data.setObjectName(_fromUtf8("textEdit_Data"))
@@ -755,7 +758,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         font.setPointSize(14)
         self.textEdit_Data.setFont(font)        
         
-        self.textEdit_Res = QtGui.QTextEdit(self.tab_Bjm)
+        self.textEdit_Res = QtGui.QPlainTextEdit(self.tab_Bjm)
         self.textEdit_Res.setGeometry(QtCore.QRect(0, 230, 691, 171))
         self.textEdit_Res.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
         self.textEdit_Res.setReadOnly(True)
@@ -1066,7 +1069,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
 
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(_translate("MainWindow", "By Topper 2016.01", None))
+        MainWindow.setWindowTitle(_translate("MainWindow", "网络测试工具 V1.0", None))
         self.Label_Ip.setText(_translate("MainWindow", "IP", None))
         self.B_send.setText(_translate("MainWindow", "发送", None))
         self.radio_wireshark.setText(_translate("MainWindow", "WireShark流", None))
@@ -1163,8 +1166,8 @@ class Ui_MainWindow(QtGui.QMainWindow):
         self.Show_Log.setText("")               #Log输出窗口
         self.comboBox_Rz.setCurrentIndex(0)     #认证下拉列表框
         self.comboBox_raw.setCurrentIndex(0)    #数据解码列表框
-        self.textEdit_Data.setText("")          #编解码原文输入框
-        self.textEdit_Res.setText("")           #编解码结果显示框
+        self.textEdit_Data.setPlainText("")          #编解码原文输入框
+        self.textEdit_Res.setPlainText("")           #编解码结果显示框
         self.CheckBox_Enter.setChecked(False)   #使用回车\r\n
         self.Show_Status.setText(u"状态:未运行")
         self.Show_Status.setAutoFillBackground(True)
@@ -1548,25 +1551,25 @@ class Ui_MainWindow(QtGui.QMainWindow):
         data=data.strip()
         if self.comboBox_BM.currentIndex()==0:                              #Base64加密解密
             try:
-                self.textEdit_Res.setText(self.Base64("encode",data))
+                self.textEdit_Res.setPlainText(self.Base64("encode",data))
             except:
                 self.alertBox(u"编码失败!")
             return
         elif self.comboBox_BM.currentIndex()==1:                            #MD5加密
             try:
-                self.textEdit_Res.setText(self.cMd5(data))
+                self.textEdit_Res.setPlainText(self.cMd5(data))
             except:
                 self.alertBox(u"编码失败!")
             return
         elif self.comboBox_BM.currentIndex()==2:                            #URI编码解码
             try:
-                self.textEdit_Res.setText(self.Uri("encode",data))
+                self.textEdit_Res.setPlainText(self.Uri("encode",data))
             except:
                 self.alertBox(u"编码失败!")
             return                   
         elif self.comboBox_BM.currentIndex()==3:                            #char-》16
             s=self.toHex(data)
-            self.textEdit_Res.setText(s)
+            self.textEdit_Res.setPlainText(s)
 
 
 
@@ -1607,7 +1610,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         if self.comboBox_BM.currentIndex()==0:                              #Base64加密解密
             s=self.getBMcode(self.Base64("decode",data))
             try:
-                self.textEdit_Res.setText(s)
+                self.textEdit_Res.setPlainText(s)
             except:
                 self.alertBox(u"解码失败!")
                 return                 
@@ -1616,7 +1619,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
         elif self.comboBox_BM.currentIndex()==2:                            #URI编码解码
             s=self.getBMcode(self.Uri("decode",data))
             try:
-                self.textEdit_Res.setText(s)
+                self.textEdit_Res.setPlainText(s)
             except:
                 self.alertBox(u"解码失败!")
                 return       
@@ -1627,7 +1630,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
                 self.alertBox(u"16进制流不标准，转换失败!")
                 return
             try:
-                self.textEdit_Res.setText(s) 
+                self.textEdit_Res.setPlainText(s) 
             except:
                 self.alertBox(u"解码失败!")
         elif self.comboBox_BM.currentIndex()==4:                            #Hex-》char
@@ -1637,7 +1640,7 @@ class Ui_MainWindow(QtGui.QMainWindow):
                 self.alertBox(u"16进制流不标准，转换失败!")
                 return
             try:
-                self.textEdit_Res.setText(s) 
+                self.textEdit_Res.setPlainText(s) 
             except:
                 self.alertBox(u"解码失败!")                
 
@@ -1670,12 +1673,12 @@ class Ui_MainWindow(QtGui.QMainWindow):
 
     def Bf_BBM_Change(self):
         tmp=self.textEdit_Data.toPlainText()
-        self.textEdit_Data.setText(self.textEdit_Res.toPlainText())
-        self.textEdit_Res.setText(tmp)
+        self.textEdit_Data.setPlainText(self.textEdit_Res.toPlainText())
+        self.textEdit_Res.setPlainText(tmp)
 
     def Bf_BBM_Flush(self):
-        self.textEdit_Data.setText(u"")
-        self.textEdit_Res.setText(u"")        
+        self.textEdit_Data.setPlainText(u"")
+        self.textEdit_Res.setPlainText(u"")        
 
     def Bf_BBM_JSQ(self):
         pass
