@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 
 #
-# Created: Wed Nov 04 12:26:17 2015
-#      by: Topper
 #
 # WARNING! All changes made in this file will be lost!
 import sys
 import socket
 import time
 import re
-#import win32api
 import random
 import struct
 import threading
